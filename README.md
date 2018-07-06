@@ -1,7 +1,12 @@
 SolidusPremadeCarts
 ===================
 
-Introduction goes here.
+The fastest way to get your customers from "Looks neat" to "thanks for purchasing."
+
+Some shopping platforms allow customers to add a specific item to their cart by
+clicking a link, and they may even take the customer to the checkout page. We
+improve on that capability a little by allowing the store owner to specify more
+than one product, and by allowing promotions to be applied as well.
 
 Installation
 ------------
@@ -36,4 +41,4 @@ Simply add this require statement to your spec_helper:
 require 'solidus_premade_carts/factories'
 ```
 
-Copyright (c) 2018 [name of extension creator], released under the New BSD License
+Copyright (c) 2018 Gemini Development LLC, released under the New BSD License

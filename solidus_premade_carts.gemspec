@@ -5,28 +5,32 @@ require 'solidus_premade_carts/version'
 Gem::Specification.new do |s|
   s.name        = 'solidus_premade_carts'
   s.version     = SolidusPremadeCarts::VERSION
-  s.summary     = 'TODO'
-  s.description = 'TODO'
-  s.license     = 'BSD-3-Clause'
+  s.summary     = 'Allow pre-made carts, which can be checked out with a link'
+  s.description = 'PremadeCarts are sets of products and promotions'
+  s.license     = 'All Rights Reserved'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.example.com'
+  s.author    = 'Jim Kane'
+  s.email     = 'jim@enginecommerce.com'
+  s.homepage  = 'http://www.enginecommerce.com'
 
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'solidus_core', '~> 1.0'
+  s.add_dependency 'solidus_core', '>= 1.0'
+  # s.add_dependency 'solidus_backend', '>= 1.0'
 
   s.add_development_dependency 'capybara'
-  s.add_development_dependency 'poltergeist'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'capybara-screenshot'
   s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_girl'
+  s.add_development_dependency 'factory_bot'
+  s.add_development_dependency 'pry-byebug'
+  s.add_development_dependency 'pry-rails'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rubocop', '0.37.2'
-  s.add_development_dependency 'rubocop-rspec', '1.4.0'
+  s.add_development_dependency 'rspec_junit_formatter'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-rspec'
+  s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
 end
