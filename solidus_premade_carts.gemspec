@@ -3,10 +3,13 @@ $:.push File.expand_path('../lib', __FILE__)
 require 'solidus_premade_carts/version'
 
 Gem::Specification.new do |s|
+  s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_premade_carts'
   s.version     = SolidusPremadeCarts::VERSION
   s.summary     = 'Allow pre-made carts, which can be checked out with a link'
   s.description = 'PremadeCarts are sets of products and promotions'
+
+  s.required_ruby_version = ">= 2.1"
   s.license     = 'All Rights Reserved'
 
   s.author    = 'Jim Kane'
@@ -15,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
+
+  solidus_version = [">= 1.2.0", "< 3"]
 
   s.add_dependency 'solidus_core', '>= 1.0'
   # s.add_dependency 'solidus_backend', '>= 1.0'
