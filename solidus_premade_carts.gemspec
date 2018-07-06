@@ -1,5 +1,6 @@
-# encoding: UTF-8
-$:.push File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+$:.push File.expand_path('lib', __dir__)
 require 'solidus_premade_carts/version'
 
 Gem::Specification.new do |s|
@@ -10,7 +11,7 @@ Gem::Specification.new do |s|
   s.description = 'PremadeCarts are sets of products and promotions'
 
   s.required_ruby_version = ">= 2.1"
-  s.license     = 'All Rights Reserved'
+  s.license               = 'All Rights Reserved'
 
   s.author    = 'Jim Kane'
   s.email     = 'jim@enginecommerce.com'
@@ -21,13 +22,14 @@ Gem::Specification.new do |s|
 
   solidus_version = [">= 1.2.0", "< 3"]
 
-  s.add_dependency 'solidus_core', '>= 1.0'
+  s.add_dependency 'solidus_core', solidus_version
   # s.add_dependency 'solidus_backend', '>= 1.0'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_bot'
+  s.add_development_dependency 'ffaker'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rails'
   s.add_development_dependency 'rspec-rails'
