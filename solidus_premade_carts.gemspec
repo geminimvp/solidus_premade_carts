@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   solidus_version = [">= 1.2.0", "< 3"]
 
   s.add_dependency 'solidus_core', solidus_version
-  # s.add_dependency 'solidus_backend', '>= 1.0'
+  s.add_dependency 'solidus_backend', solidus_version
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rails'
+  s.add_development_dependency 'puma'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'rspec_junit_formatter'
   s.add_development_dependency 'rubocop'

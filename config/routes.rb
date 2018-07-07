@@ -2,5 +2,9 @@
 
 Spree::Core::Engine.routes.draw do
   # Add your extension routes here
-  get "/premade_carts/:token", to: "premade_carts#show"
+  namespace :admin do
+    resources :premade_carts
+  end
+
+  get "/premade_carts/:token", to: "premade_carts#show", as: :apply_premade_cart
 end

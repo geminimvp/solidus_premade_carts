@@ -1,0 +1,20 @@
+<% content_for :page_actions do %>
+  <% if can?(:create, Spree::PremadeCart) %>
+    <li id="new_premade_cart_link">
+      <%= link_to t('spree.new_premade_cart'), new_object_url, id: 'admin_new_premade_cart', class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @premade_cart } %>
+
+<% admin_breadcrumb(t('spree.premade_cart_details')) %>
+
+<%= form_for [:admin, @premade_cart], html: { multipart: true } do |f| %>
+  <fieldset class="no-border-top">
+    <%= render partial: 'form', locals: { f: f } %>
+    <% if can?(:update, @premade_cart) %>
+      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+    <% end %>
+  </fieldset>
+<% end %>

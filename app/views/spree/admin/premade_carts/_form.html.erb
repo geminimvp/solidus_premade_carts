@@ -1,0 +1,45 @@
+<div data-hook="admin_premade_cart_form_fields">
+
+  <div class="row">
+
+    <div class="left col-9" data-hook="admin_premade_cart_form_left">
+      <div data-hook="admin_premade_cart_form_name">
+        <%= f.field_container :name do %>
+          <%= f.label :name, class: 'required' %>
+          <%= f.text_field :name, class: 'fullwidth title', required: true %>
+          <%= f.error_message_on :name %>
+        <% end %>
+      </div>
+
+      <div data-hook="admin_premade_cart_form_token">
+        <%= f.field_container :token do %>
+          <%= f.label :token, class: 'disabled' %>
+          <%= f.text_field :token, class: 'fullwidth title', disabled: true %>
+          <%= f.error_message_on :token %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="right col-3" data-hook="admin_product_form_right">
+      <div data-hook="admin_premade_cart_form_variants">
+      </div>
+
+      <div class="row">
+          permalink:
+          <% if f.object.new_record? %>
+            pending
+          <% else %>
+            <%= link_to 'link', premade_cart_permalink(f.object) %>
+          <% end %>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+
+  <div data-hook="admin_premade_cart_form_additional_fields"></div>
+
+  <div class="clear"></div>
+</div>

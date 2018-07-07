@@ -1,0 +1,75 @@
+<% admin_layout "full-width" %>
+
+<% admin_breadcrumb(plural_resource_name(Spree::PremadeCart)) %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= link_to t('spree.new_premade_cart'), new_object_url, class: 'btn btn-primary' %>
+  </li>
+<% end if can?(:create, Spree::PremadeCart) %>
+
+<% content_for :table_filter_title do %>
+  <%= t('spree.search') %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_premade_carts_sidebar">
+    <%= search_form_for [:admin, @search] do |f| %>
+        <%- locals = {f: f} %>
+        <div class="row" data-hook="admin_premade_carts_index_search" >
+          <div class="col-6">
+            <div class="field">
+              <%= f.label :name_cont, Spree::PremadeCart.human_attribute_name(:name) %>
+              <%= f.text_field :name_cont, size: 15 %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="actions filter-actions" data-hook="admin_premade_carts_index_search_buttons">
+          <%= button_tag t('spree.search'), class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div id="new_premade_cart_wrapper" data-hook></div>
+
+<%= paginate @collection, theme: "solidus_admin" %>
+
+<% if @collection.any? %>
+  <table class="index" id="listing_premade_carts">
+    <colgroup>
+       <col style="width: 15%;">
+       <col style="width: 5%;">
+       <col style="width: 50%;">
+       <col style="width: 15%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_premade_carts_index_headers">
+        <th><%= sort_link @search,:name, Spree::PremadeCart.human_attribute_name(:name), { default_order: "desc" }, {title: 'admin_premade_carts_listing_name_title'} %></th>
+        <th data-hook="admin_premade_carts_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |premade_cart| %>
+          <tr  id="<%= spree_dom_id premade_cart %>" data-hook="admin_premade_carts_index_rows">
+            <td><%= link_to premade_cart.try(:name), edit_admin_premade_cart_path(premade_cart) %></td>
+            <td class="actions" data-hook="admin_premade_carts_index_row_actions">
+              <%= link_to_edit premade_cart, no_text: true, class: 'edit' if can?(:edit, premade_cart) %>
+              &nbsp;
+              <%= link_to_delete premade_cart, no_text: true if can?(:delete, premade_cart) %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                  resource: Spree::PremadeCart,
+                  new_resource_url: new_object_url %>
+  </div>
+<% end %>
+
+<%= paginate @collection, theme: "solidus_admin" %>
