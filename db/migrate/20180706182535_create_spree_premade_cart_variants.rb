@@ -6,7 +6,7 @@ class CreateSpreePremadeCartVariants < ActiveRecord::Migration[5.2]
       t.integer :quantity, default: 1, null: false
       t.timestamps
 
-      t.index %i[spree_premade_cart_id spree_variant_id], unique: true, name: "index_pmc_variants_on_join_ids"
+      t.index %i[premade_cart_id variant_id], unique: true, name: "index_pmc_variants_on_join_ids"
     end
   end
 end
