@@ -5,6 +5,12 @@ RSpec.describe 'Premade Cart Management', type: :feature do
 
   let!(:premade_cart) { create(:premade_cart, name: 'First Bundle') }
 
+  scenario 'Admin has a link to manage premade carts', js: true do
+    visit spree.admin_orders_path
+    click_link 'Settings'
+    expect(page).to have_text('Premade Carts')
+  end
+
   scenario 'Admin creates a new premade cart', js: true do
     visit spree.admin_premade_carts_path
     click_link 'New Premade Cart'
