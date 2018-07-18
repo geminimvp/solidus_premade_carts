@@ -27,5 +27,4 @@ RSpec.describe 'Premade Cart Management', type: :feature do
     click_button 'Update'
     expect(page).to have_text('Cooler Bundle Name')
   end
-
 end

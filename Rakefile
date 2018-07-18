@@ -16,6 +16,7 @@ begin
   task default: %i(first_run rubocop spec)
 rescue LoadError
   # no rspec available
+  warn "error loading rake tasks"
 end
 
 task :first_run do

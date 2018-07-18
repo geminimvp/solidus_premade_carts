@@ -3,7 +3,6 @@
 module Spree
   module Admin
     class PremadeCartsController < ResourceController
-
       def index
         respond_with(@collection)
       end
