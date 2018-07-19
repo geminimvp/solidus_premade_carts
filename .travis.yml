@@ -6,7 +6,16 @@ script:
   - bundle exec rake
 rvm:
   - 2.3.1
+addons:
+  chrome: stable
 
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - bundle exec rails s
+  - sleep 3
+  - google-chrome-stable --headless --disable-gpu --remoet-debugging-port=9222 http://localhost:3000 &
 env:
   matrix:
     - SOLIDUS_BRANCH=v2.2 DB=postgres
