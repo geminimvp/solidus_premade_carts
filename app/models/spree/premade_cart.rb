@@ -5,6 +5,8 @@ module Spree
     has_many :premade_cart_variants, class_name: 'Spree::PremadeCartVariant', dependent: :destroy
     has_many :variants, class_name: 'Spree::Variant', through: :premade_cart_variants
 
+    accepts_nested_attributes_for :premade_cart_variants, allow_destroy: true
+
     validates :name, presence: true
     validates :token, presence: true, uniqueness: true
 

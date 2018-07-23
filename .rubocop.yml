@@ -5,7 +5,7 @@ AllCops:
     - '*.gemspec'
     - 'bin/*'
     - 'Gemfile*'
-    - 'spec/dummy/**/*'
+    - 'spec/**/*'
     - 'vendor/bundle/**/*'
   TargetRubyVersion: 2.3
 

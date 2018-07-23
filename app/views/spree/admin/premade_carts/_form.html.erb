@@ -37,6 +37,22 @@
     </div>
   </div>
 
+  <div class="row" >
+      <div class="left col-9">
+          Variants:
+          <ul>
+              <%= f.fields_for :premade_cart_variants do |ff| %>
+                  <% variant = ff.object.variant %>
+                  <li>
+                      <%= ff.hidden_field :premade_cart_id %>
+                      <%= ff.hidden_field :variant_id %>
+                      <%= variant.sku %>
+                  </li>
+              <% end %>
+          </ul>
+      </div>
+  </div>
+
   <div class="clear"></div>
 
   <div data-hook="admin_premade_cart_form_additional_fields"></div>

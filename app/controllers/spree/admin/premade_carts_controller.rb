@@ -7,6 +7,16 @@ module Spree
         respond_with(@collection)
       end
 
+      def new
+        if params[:variant_ids].present?
+          variant_ids = params[:variant_ids].map(&:to_i)
+          variant_ids.each do |variant_id|
+            @object.premade_cart_variants.build(variant_id: variant_id)
+          end
+        end
+        super
+      end
+
       def show
         redirect_to action: :edit
       end

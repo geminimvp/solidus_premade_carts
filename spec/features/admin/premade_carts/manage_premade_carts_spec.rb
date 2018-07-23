@@ -4,6 +4,9 @@ RSpec.describe 'Premade Cart Management', type: :feature do
   stub_authorization!
 
   let!(:premade_cart) { create(:premade_cart, name: 'First Bundle') }
+  let!(:product_wo_variants) { create(:product) }
+  let(:master) { product_wo_variants.master }
+  # let!(:product_with_variants) { create(:product_with_variants) }
 
   scenario 'Admin has a link to manage premade carts', js: true do
     visit spree.admin_orders_path
@@ -17,6 +20,18 @@ RSpec.describe 'Premade Cart Management', type: :feature do
     fill_in 'Name', with: 'Awesome Bundle Offer'
     click_button 'Create'
     expect(page).to have_text('Awesome Bundle Offer')
+  end
+
+  scenario 'Admin creates a cart from a product master variant', js: true do
+    visit spree.admin_products_path
+    click_link product_wo_variants.name
+    click_link 'create cart'
+    expect(page).to have_text(master.sku)
+    fill_in 'Name', with: 'Buy this product offer'
+    click_button 'Create'
+    expect(page).to have_text('Buy this product offer')
+    click_link 'Buy this product offer'
+    expect(page).to have_text(master.sku)
   end
 
   scenario 'Admin updates a premade cart' do
