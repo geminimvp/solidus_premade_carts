@@ -1,4 +1,4 @@
-class CreateSpreePremadeCartVariants < ActiveRecord::Migration[5.2]
+class CreateSpreePremadeCartVariants < ActiveRecord::Migration[5.1]
   def change
     create_table :spree_premade_cart_variants do |t|
       t.belongs_to :premade_cart, index: true, foreign_key: { to_table: :spree_premade_carts }

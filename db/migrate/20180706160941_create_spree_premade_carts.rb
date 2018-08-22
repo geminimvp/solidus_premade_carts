@@ -1,4 +1,4 @@
-class CreateSpreePremadeCarts < ActiveRecord::Migration[5.2]
+class CreateSpreePremadeCarts < ActiveRecord::Migration[5.1]
   def change
     create_table :spree_premade_carts do |t|
       t.string :name, null: false
