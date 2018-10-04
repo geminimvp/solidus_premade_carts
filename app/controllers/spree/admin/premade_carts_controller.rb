@@ -33,6 +33,7 @@ module Spree
 
       def collection
         return @collection if @collection
+
         params[:q] ||= {}
         params[:q][:s] ||= "name asc"
         # @search needs to be defined as this is passed to search_form_for
