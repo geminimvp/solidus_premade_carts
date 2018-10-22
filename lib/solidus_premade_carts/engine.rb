@@ -2,6 +2,7 @@
 
 module SolidusPremadeCarts
   class Engine < Rails::Engine
+
     require 'spree/core'
     isolate_namespace Spree
     engine_name 'solidus_premade_carts'
@@ -18,5 +19,6 @@ module SolidusPremadeCarts
     end
 
     config.to_prepare(&method(:activate).to_proc)
+
   end
 end

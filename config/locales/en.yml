@@ -3,3 +3,21 @@
 
 en:
   hello: Hello world
+  premade_carts:
+    add_variant_to_cart: Add variant to cart
+    name: Name
+    sku: SKU
+    quantity: Quantity
+    add_to_premade_cart: Add to premade cart
+    create_and_add_to_premade_cart: Create and add to premade cart
+    permalink: permalink
+    pending: pending
+    add_to_premade_cart: Add to premade cart
+  spree:
+    new_premade_cart: New Premade Cart
+    premade_cart_details: Premade Cart Details
+    admin:
+      tab:
+        premade_carts: Premade Carts
+      tab_description:
+        premade_carts: Premade Carts

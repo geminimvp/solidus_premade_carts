@@ -1,7 +1,17 @@
-<div data-hook="admin_premade_cart_form_fields">
-
+<div id="premade-cart-form" data-hook="admin_premade_cart_form_fields">
+  <h5 class="row d-block">
+    <div class="col">
+      <%= t('premade_carts.permalink') %>:
+      <% if f.object.new_record? %>
+        <%= t('premade_carts.pending') %>
+      <% else %>
+        <input id="premade-cart-text" class="d-none" value="<%= premade_cart_permalink(f.object) %>"></input>
+        <%= link_to premade_cart_permalink(f.object), premade_cart_permalink(f.object), id: 'premade-cart-link' %>
+        <span id="copy-to-clipboard" class="fa fa-clipboard trigger-flash" data-flash-type="success" />
+      <% end %>
+    </div>
+  </h5>
   <div class="row">
-
     <div class="left col-9" data-hook="admin_premade_cart_form_left">
       <div data-hook="admin_premade_cart_form_name">
         <%= f.field_container :name do %>
@@ -23,34 +33,69 @@
     <div class="right col-3" data-hook="admin_product_form_right">
       <div data-hook="admin_premade_cart_form_variants">
       </div>
-
-      <div class="row">
-          permalink:
-          <% if f.object.new_record? %>
-            pending
-          <% else %>
-            <%= link_to 'link', premade_cart_permalink(f.object) %>
-          <% end %>
-      </div>
-
       <div class="clear"></div>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <table>
+        <thead>
+          <% if f.object.premade_cart_variants.any? %>
+            <tr>
+              <th />
+              <th><%= t('premade_carts.name') %></th>
+              <th><%= t('premade_carts.sku') %></th>
+              <th><%= t('premade_carts.quantity') %></th>
+              <th />
+            </tr>
+          <% end %>
+        </thead>
+        <tbody>
+          <%= f.fields_for :premade_cart_variants do |ff| %>
+            <% variant = ff.object.variant %>
+            <%= ff.hidden_field :premade_cart_id %>
+            <%= ff.hidden_field :variant_id %>
+            <tr>
+              <td><%= image_tag variant.images.first.try(:mini_url).to_s %></td>
+              <td><%= variant.name %></td>
+              <td><%= variant.sku %></td>
+              <td><%= ff.number_field :quantity, class: 'w-25' %></td>
+              <td>
+                <% if ff.object.persisted? %>
+                  <%= link_to admin_premade_cart_variant_path(ff.object.id, variant_ids: params[:variant_ids]), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                    <span class="fa fa-times text-danger"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to temporary_variant_removal_path(f.object, variant), data: { confirm: 'Are you sure?' } do %>
+                    <span class="fa fa-times text-danger"></span>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-  <div class="row" >
-      <div class="left col-9">
-          Variants:
-          <ul>
-              <%= f.fields_for :premade_cart_variants do |ff| %>
-                  <% variant = ff.object.variant %>
-                  <li>
-                      <%= ff.hidden_field :premade_cart_id %>
-                      <%= ff.hidden_field :variant_id %>
-                      <%= variant.sku %>
-                  </li>
-              <% end %>
-          </ul>
+  <div class="row">
+    <div class="col">
+      <div id="add-line-item" class="js-shipment-add-variant" data-hook>
+        <fieldset class="no-border-bottom">
+          <div data-hook="add_product_name" class="field">
+            <%= label_tag :add_variant_id, t('spree.name_or_sku') %>
+            <div class="row">
+              <div class="col-10">
+                <%= text_field_tag :add_variant_id, "", class: "variant_autocomplete fullwidth" %>
+              </div>
+              <div class="col-2">
+                <%= link_to t('premade_carts.add_variant_to_cart'), [:admin, f.object], class: 'btn btn-default d-none', id: 'add-variant-to-cart' %>
+              </div>
+            </div>
+          </div>
+        </fieldset>
       </div>
+    </div>
   </div>
 
   <div class="clear"></div>

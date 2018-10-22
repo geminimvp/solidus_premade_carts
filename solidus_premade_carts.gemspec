@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Allow pre-made carts, which can be checked out with a link'
   s.description = 'PremadeCarts are sets of products and promotions'
 
-  s.required_ruby_version = ">= 2.1"
+  s.required_ruby_version = '>= 2.1'
   s.license               = 'All Rights Reserved'
 
   s.author    = 'Jim Kane'
@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
 
   solidus_version = [">= 1.2.0", "< 3"]
 
-  s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_backend', solidus_version
+  s.add_dependency 'solidus_core', solidus_version
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'

@@ -1,5 +1,6 @@
 module Spree
   class PremadeCart < ActiveRecord::Base
+
     self.table_name = 'spree_premade_carts'
 
     has_many :premade_cart_variants, class_name: 'Spree::PremadeCartVariant', dependent: :destroy
@@ -26,5 +27,6 @@ module Spree
         break random_token unless self.class.exists?(token: random_token)
       end
     end
+
   end
 end

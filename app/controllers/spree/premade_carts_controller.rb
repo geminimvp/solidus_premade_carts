@@ -1,5 +1,6 @@
 module Spree
   class PremadeCartsController < Spree::StoreController
+
     def show
       @premade_cart = Spree::PremadeCart.find_by(token: params[:token].to_s)
 
@@ -15,5 +16,6 @@ module Spree
       # redirect to checkout
       redirect_to checkout_path
     end
+
   end
 end

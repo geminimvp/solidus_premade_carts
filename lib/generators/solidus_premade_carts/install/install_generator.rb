@@ -3,6 +3,9 @@
 module SolidusPremadeCarts
   module Generators
     class InstallGenerator < Rails::Generators::Base
+
+      source_root(__dir__)
+
       class_option :auto_run_migrations, type: :boolean, default: false
 
       def add_javascripts
@@ -11,8 +14,12 @@ module SolidusPremadeCarts
       end
 
       def add_stylesheets
-        inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/solidus_premade_carts\n", before: /\*\//, verbose: true
-        inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/solidus_premade_carts\n", before: /\*\//, verbose: true
+        inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/solidus_premade_carts\n", before: %r(/\*\//), verbose: true
+        inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/solidus_premade_carts\n", before: %r(/\*\//), verbose: true
+      end
+
+      def create_initializer_file
+        copy_file 'premade_carts_initializer.rb', 'config/initializers/premade_carts_initializer.rb'
       end
 
       def add_migrations
@@ -27,6 +34,7 @@ module SolidusPremadeCarts
           puts 'Skipping rake db:migrate, don\'t forget to run it!'
         end
       end
+
     end
   end
 end
