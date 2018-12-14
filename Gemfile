@@ -7,9 +7,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '< 5.2.0'
+gem 'rails', '< 5.3.0'
 
-gem 'solidus', github: 'solidusio/solidus'
+gem 'solidus'
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise', '~> 1.0'
 
