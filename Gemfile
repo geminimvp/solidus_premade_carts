@@ -11,6 +11,6 @@ gem 'rails', '< 5.3.0'
 
 gem 'solidus'
 # Provides basic authentication functionality for testing parts of your engine
-gem 'solidus_auth_devise', '~> 1.0'
+gem 'solidus_auth_devise', '~> 2.1'
 
 gemspec
