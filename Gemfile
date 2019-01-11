@@ -10,6 +10,7 @@ end
 gem 'rails', '< 5.3.0'
 
 gem 'solidus'
+gem 'deface'
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise', '~> 2.1'
 

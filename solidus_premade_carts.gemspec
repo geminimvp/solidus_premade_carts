@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'solidus_backend', solidus_version
   s.add_dependency 'solidus_core', solidus_version
+  s.add_dependency 'deface'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'
