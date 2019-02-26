@@ -4,7 +4,7 @@
 
 <%= form_for [:admin, @premade_cart], method: :post, url: admin_premade_carts_path do |f| %>
   <fieldset data-hook="new_premade_cart">
-    <legend align="center"><%= t('spree.new_premade_cart') %></legend>
+    <legend align="center"><%= I18n.t('spree.new_premade_cart') %></legend>
 
     <%= render partial: 'form', locals: { f: f } %>
 
