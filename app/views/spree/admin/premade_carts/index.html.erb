@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= link_to t('spree.new_premade_cart'), new_object_url, class: 'btn btn-primary' %>
+    <%= link_to I18n.t('spree.new_premade_cart'), new_object_url, class: 'btn btn-primary' %>
   </li>
 <% end if can?(:create, Spree::PremadeCart) %>
 
@@ -20,7 +20,7 @@
 <% end if can?(:create, Spree::PremadeCart) %>
 
 <% content_for :table_filter_title do %>
-  <%= t('spree.search') %>
+  <%= I18n.t('spree.search') %>
 <% end %>
 
 <% content_for :table_filter do %>
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="actions filter-actions pt-3" data-hook="admin_premade_carts_index_search_buttons">
-            <%= button_tag t('spree.search'), class: 'btn btn-primary' %>
+            <%= button_tag I18n.t('spree.search'), class: 'btn btn-primary' %>
           </div>
         </div>
     <% end %>
