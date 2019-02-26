@@ -4,62 +4,100 @@
 #
 version: 2
 jobs:
-  build:
+  mysql:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.5.1-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/mysql:5.7
-      - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
+      - image: circleci/mysql:5.7.25
+    working_directory: &workdir ~/repo
     steps:
       - checkout
-
-      # Download and cache dependencies
+      # Restore bundle cache
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
+            - v1-dependencies-{{ .Branch }}
+            - v1-dependencies-
       - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
+          name: Bundle Install
+          command:
+            bundle install --path=vendor/bundle
+      # Store bundle cache
       - save_cache:
+          key: v1-dependencies-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
+      # Install Chrome lastest version
       - run:
-          name: setup matrix
-          command: |
-            mkdir -p ~/.local/bin
-            curl -fsSL https://git.io/v2Ifs -o ~/.local/bin/circleci-matrix
-            chmod +x ~/.local/bin/circleci-matrix
-
-
+         name: Install Chrome
+         command: |
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            sudo apt-get update
+            sudo apt-get -y install google-chrome-stable
       # Dummy app setup
-      - run: bundle exec rake first_run
-
+      - run: bundle exec rake test_app
       # Check syntax and style
       - run: bundle exec rubocop
-
       # run tests!
       - run:
           name: run tests
-          command: |
-            ~/.local/bin/circleci-matrix --config .circleci/matrix.yml
-
+          command: bundle exec rspec
       # collect reports
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+  postgres:
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/postgres:10.7
+    working_directory: &workdir ~/repo
+    steps:
+      - checkout
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ .Branch }}
+            - v1-dependencies-
+      - run:
+          name: Bundle Install
+          command:
+            bundle install --path=vendor/bundle
+      # Store bundle cache
+      - save_cache:
+          key: v1-dependencies-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
+      - run: sudo apt install -y postgresql-client
+      # Install Chrome lastest version
+      - run:
+         name: Install Chrome
+         command: |
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            sudo apt-get update
+            sudo apt-get -y install google-chrome-stable
+      # Dummy app setup
+      - run: bundle exec rake test_app
+      # Check syntax and style
+      - run: bundle exec rubocop
+      # run tests!
+      - run:
+          name: run tests
+          command: bundle exec rspec
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - mysql
+      - postgres
