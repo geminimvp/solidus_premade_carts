@@ -20,27 +20,20 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  solidus_version = [">= 1.2.0", "< 3"]
-
-  s.add_dependency 'solidus_backend', solidus_version
-  s.add_dependency 'solidus_core', solidus_version
+  s.add_dependency 'solidus', ['>= 2.0', '< 3']
+  s.add_dependency 'solidus_support'
   s.add_dependency 'deface'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'
-  s.add_development_dependency 'chromedriver-helper'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'pry-byebug'
-  s.add_development_dependency 'pry-rails'
   s.add_development_dependency 'puma'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rspec_junit_formatter'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-rspec'
   s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.3.6'
 end

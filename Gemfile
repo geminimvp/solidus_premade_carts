@@ -1,17 +1,38 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
+branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
+gem 'solidus', github: 'solidusio/solidus', branch: branch
+gem 'solidus_auth_devise', '~> 1.0'
+
+if branch == 'master' || branch >= 'v2.3'
+  gem 'rails', '~> 5.1.6'
+elsif branch >= 'v2.0'
+  gem 'rails', '~> 5.0.7'
+else
+  gem 'rails', '~> 4.2.10'
 end
 
-gem 'rails', '< 5.3.0'
+gem 'mysql2', '~> 0.4.10'
+gem 'pg', '~> 0.21'
 
-gem 'solidus'
-gem 'deface'
-# Provides basic authentication functionality for testing parts of your engine
-gem 'solidus_auth_devise', '~> 2.1'
+group :test do
+  if branch == 'master' || branch >= 'v2.0'
+    gem 'rails-controller-testing'
+  else
+    gem 'rails_test_params_backport'
+  end
+
+  if branch < 'v2.5'
+    gem 'factory_bot', '4.10.0'
+  else
+    gem 'factory_bot', '> 4.10.0'
+  end
+end
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+end
 
 gemspec
