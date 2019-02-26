@@ -8,6 +8,17 @@
   </li>
 <% end if can?(:create, Spree::PremadeCart) %>
 
+<% content_for :header_actions do %>
+  <li>
+    <%= link_to(new_object_url,
+                id: 'admin_new_premade_carts_link',
+                class: 'btn btn-primary btn-rounded') do %>
+      <i class='icon icon-plus-white mr-2 align-middle'></i>
+      <%= t('spree.new_premade_cart') %>
+    <% end %>
+  </li>
+<% end if can?(:create, Spree::PremadeCart) %>
+
 <% content_for :table_filter_title do %>
   <%= t('spree.search') %>
 <% end %>
