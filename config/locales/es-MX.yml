@@ -1,0 +1,22 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es-MX:
+  premade_carts:
+    add_variant_to_cart: Añadir variante al carrito.
+    name: Nombre
+    sku: SKU
+    quantity: Cantidad
+    add_to_premade_cart: Añadir al carrito prefabricado.
+    create_and_add_to_premade_cart: Crear y añadir al carrito prefabricado.
+    permalink: enlace permanente
+    pending: pendiente
+    add_to_premade_cart: Añadir al carrito prefabricado.
+  spree:
+    new_premade_cart: Nuevo Carrito Prefabricado
+    premade_cart_details: Detalles del carrito prefabricado
+    admin:
+      tab:
+        premade_carts: Carritos Prefabricados
+      tab_description:
+        premade_carts: Carritos Prefabricados
