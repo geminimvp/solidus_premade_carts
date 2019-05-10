@@ -25,7 +25,7 @@ RSpec.describe 'Premade Cart Management', type: :feature do
   scenario 'Admin adds a variant to a premade cart', js: true do
     visit spree.admin_products_path
     click_link product_wo_variants.name
-    click_link I18n.t('premade_carts.add_to_premade_cart')
+    click_link I18n.t('spree.premade_carts.add_to_premade_cart')
     expect(page).to have_text(master.sku)
     fill_in 'Name', with: 'Buy this product offer'
     expect { click_button 'Update' }.to change { premade_cart.variants.count }.by 1

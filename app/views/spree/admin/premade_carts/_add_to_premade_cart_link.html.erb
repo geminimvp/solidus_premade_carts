@@ -1,8 +1,8 @@
 <% premade_cart = Spree::PremadeCart.first %>
 <div data-hook='admin_product_create_cart'>
   <% if premade_cart %>
-    <%= link_to I18n.t('premade_carts.add_to_premade_cart'), edit_admin_premade_cart_path(premade_cart, 'variant_ids[]' => @product.master.id), class: 'btn btn-default w-100' %>
+    <%= link_to I18n.t('spree.premade_carts.add_to_premade_cart'), edit_admin_premade_cart_path(premade_cart, 'variant_ids[]' => @product.master.id), class: 'btn btn-default w-100' %>
   <% else %>
-    <%= link_to I18n.t('premade_carts.add_to_premade_cart'), new_admin_premade_cart_path('variant_ids[]' => @product.master.id), class: 'btn btn-default w-100' %>
+    <%= link_to I18n.t('spree.premade_carts.add_to_premade_cart'), new_admin_premade_cart_path('variant_ids[]' => @product.master.id), class: 'btn btn-default w-100' %>
   <% end %>
 </div>

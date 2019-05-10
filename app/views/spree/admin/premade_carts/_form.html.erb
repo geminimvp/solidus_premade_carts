@@ -1,9 +1,9 @@
 <div id="premade-cart-form" data-hook="admin_premade_cart_form_fields">
   <h5 class="row d-block">
     <div class="col">
-      <%= I18n.t('premade_carts.permalink') %>:
+      <%= I18n.t('spree.premade_carts.permalink') %>:
       <% if f.object.new_record? %>
-        <%= I18n.t('premade_carts.pending') %>
+        <%= I18n.t('spree.premade_carts.pending') %>
       <% else %>
         <input id="premade-cart-text" class="d-none" value="<%= premade_cart_permalink(f.object) %>"></input>
         <%= link_to premade_cart_permalink(f.object), premade_cart_permalink(f.object), id: 'premade-cart-link' %>
@@ -43,9 +43,9 @@
           <% if f.object.premade_cart_variants.any? %>
             <tr>
               <th />
-              <th><%= I18n.t('premade_carts.name') %></th>
-              <th><%= I18n.t('premade_carts.sku') %></th>
-              <th><%= I18n.t('premade_carts.quantity') %></th>
+              <th><%= I18n.t('spree.premade_carts.name') %></th>
+              <th><%= I18n.t('spree.premade_carts.sku') %></th>
+              <th><%= I18n.t('spree.premade_carts.quantity') %></th>
               <th />
             </tr>
           <% end %>
@@ -89,7 +89,7 @@
                 <%= text_field_tag :add_variant_id, "", class: "variant_autocomplete fullwidth" %>
               </div>
               <div class="col-2">
-                <%= link_to I18n.t('premade_carts.add_variant_to_cart'), [:admin, f.object], class: 'btn btn-default d-none', id: 'add-variant-to-cart' %>
+                <%= link_to I18n.t('spree.premade_carts.add_variant_to_cart'), [:admin, f.object], class: 'btn btn-default d-none', id: 'add-variant-to-cart' %>
               </div>
             </div>
           </div>
